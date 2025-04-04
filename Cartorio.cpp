@@ -26,7 +26,7 @@ int validarCPF(char cpf[])
     return 1; // CPF válido
 }
 
-int registro() // Função responsável para cadastrar os usuários no sistema
+void registro() // Função responsável para cadastrar os usuários no sistema
 { 
     char arquivo[40];
     char cpf[12];  // CPF com 11 números + '\0' (terminador nulo)
@@ -80,10 +80,10 @@ int registro() // Função responsável para cadastrar os usuários no sistema
     fprintf(file, "\n");
     fclose(file); // Fecha o arquivo
     
-    system("pause");
+    
 }
 
-int consulta() // Função responsável para consultar os usuários no sistema
+void consulta() // Função responsável para consultar os usuários no sistema
 { 
     char cpf[12];  // CPF com 11 números + '\0' (terminador nulo)
     char conteudo[200];
@@ -110,7 +110,7 @@ int consulta() // Função responsável para consultar os usuários no sistema
     }
 }
 
-int deletar() // Função responsável para deletar os usuários no sistema
+void deletar() // Função responsável para deletar os usuários no sistema
 { 
     char cpf[12];  // CPF com 11 números + '\0' (terminador nulo)
     
@@ -118,6 +118,7 @@ int deletar() // Função responsável para deletar os usuários no sistema
     scanf("%s", cpf); // Lê o CPF como string
     
     remove(cpf); // Deleta o arquivo com o nome do CPF
+    
     
     FILE *file;
     file = fopen(cpf, "r");
@@ -129,52 +130,79 @@ int deletar() // Função responsável para deletar os usuários no sistema
     }
 }
 
+
+
 int main() 
 {
     int opcao = 0; // Definindo variáveis
-    int x = 1;
+    char senhadigitada[20];
     
-    for (x = 1; x == 1;) 
-	{
-        system("cls");
-        
-        setlocale(LC_ALL, "Portuguese"); //Definindo a linguagem
+    setlocale(LC_ALL, "Portuguese"); //Definindo a linguagem
     
-        printf("#### Cartório da Ebac ####\n\n"); // Início do menu
-        printf("Escolha a opção desejada do menu:\n\n");
-        printf("\t1- Registrar nomes\n ");
-        printf("\t2- Consultar nomes\n ");
-        printf("\t3- Deletar nomes\n ");
-        printf("\t4- Sair\n\n");
-        printf("Opção: ");
-        
-        scanf("%d", &opcao); // Armazena a escolha do usuário
-        
-        system("cls");
-        
-        switch(opcao) 
+    while (1)
+    {
+    	printf("#### Cartório da Ebac ####\n\n");
+	    printf("Login de Administrador!\n\nDigite a sua senha:");
+	    scanf("%s", senhadigitada);
+	    
+	    if(strcmp(senhadigitada, "admin") == 0)
+	    {
+			break;
+		}
+		else
 		{
-            case 1:
-                registro();
-                break;
-            
-            case 2:
-                consulta();
-                break;
-            
-            case 3:
-                deletar();
-                break;
-            
-            case 4:
-                printf("Obrigado por utilizar nosso sistema!\n");
-                return 0;
-                break;    
-            
-            default:
-                printf("Essa opção não está disponível!\n");
-                system("pause");
-                break;        
+            printf("Senha incorreta! Tente novamente.\n\n");
+            system("pause");
+            system("cls");
         }
-    }   
+	}
+	
+		
+	    
+	    
+	    	while (1)
+			{
+	        	system("cls");
+	        
+	        	setlocale(LC_ALL, "Portuguese"); //Definindo a linguagem
+	    
+	        	printf("#### Cartório da Ebac ####\n\n"); // Início do menu
+	        	printf("Escolha a opção desejada do menu:\n\n");
+	        	printf("\t1- Registrar nomes\n ");
+	        	printf("\t2- Consultar nomes\n ");
+	        	printf("\t3- Deletar nomes\n ");
+	        	printf("\t4- Sair\n\n");
+	        	printf("Opção: ");
+	        	scanf("%d", &opcao); // Armazena a escolha do usuário
+	        	system("cls");
+	        
+	        	switch(opcao) 
+				{
+		            case 1:
+	    	            registro();
+	        	        break;
+	            
+	      	      case 2:
+	        	        consulta();
+	            	    break;
+	            
+	       	     case 3:
+	        	        deletar();
+	            	    break;
+	            
+	           	 case 4:
+	            	    printf("Obrigado por utilizar nosso sistema!\n");
+	                	return 0;
+	               	 	break;    
+	            
+	            	default:
+	                	printf("Essa opção não está disponível!\n");
+	                	system("pause");
+	                	break;        
+	        	}
+	    	}   
+		
+
+	return 0;
 }
+
